@@ -3,153 +3,2825 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SAAMS - Student Academic Management System</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222}
-.topbar{background:#071d49;color:#fff;padding:9px 6%;font-size:13px;display:flex;justify-content:space-between}
-header{background:#fff;height:75px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.08);position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:12px}.logo-icon{width:45px;height:45px;background:#0b5ed7;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:22px;font-weight:bold}.logo h2{color:#092b68;font-size:21px}.logo small{color:#777;font-size:10px}
-nav ul{list-style:none;display:flex;gap:22px;align-items:center}nav a{text-decoration:none;color:#222;font-size:14px;font-weight:bold}nav a:hover{color:#0b5ed7}.login-button{background:#0b5ed7;color:#fff!important;padding:10px 16px;border-radius:6px}.menu{display:none;font-size:28px;cursor:pointer}
-#homePage{display:block}.hero{min-height:480px;padding:70px 7%;display:flex;align-items:center;color:#fff;background:linear-gradient(rgba(5,30,70,.9),rgba(5,30,70,.9)),url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80") center/cover}.hero-content{max-width:700px}.hero h1{font-size:46px;line-height:1.2;margin-bottom:18px}.hero p{font-size:17px;line-height:1.7;color:#dce7f6}.hero-buttons{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}.btn{border:none;padding:13px 22px;border-radius:7px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:#0b5ed7;color:#fff}.secondary{background:#fff;color:#092b68}
-.quick{width:88%;margin:-40px auto 50px;background:#fff;border-radius:12px;display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 7px 25px rgba(0,0,0,.1);position:relative;z-index:10;overflow:hidden}.quick-card{text-align:center;padding:25px 15px;border-right:1px solid #eee}.quick-card:last-child{border-right:none}.quick-card .icon{font-size:28px;margin-bottom:8px}.quick-card h3{color:#092b68;font-size:15px;margin-bottom:5px}.quick-card p{color:#777;font-size:12px;margin-bottom:8px}.quick-card a{color:#0b5ed7;font-size:12px;font-weight:bold;text-decoration:none}
-section{padding:65px 7%}.section-title{text-align:center;margin-bottom:35px}.section-title h2{color:#092b68;font-size:32px}.section-title p{color:#777;margin-top:8px}
-.notice-area{display:grid;grid-template-columns:1.5fr .8fr;gap:25px}.card{background:#fff;padding:27px;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.06)}.notice{display:flex;gap:15px;padding:17px 0;border-bottom:1px solid #eee}.notice:last-child{border-bottom:none}.date{min-width:55px;height:52px;background:#eaf2ff;color:#0b5ed7;border-radius:7px;text-align:center;padding-top:8px;font-weight:bold;font-size:12px}.notice h4{color:#333;margin-bottom:5px}.notice p{color:#777;font-size:13px}
-.login-card{background:#092b68;color:#fff}.login-card h3{margin-bottom:8px}.login-card p{color:#d5e0f2;font-size:13px;line-height:1.6;margin-bottom:17px}.login-card input,.login-card select{width:100%;padding:12px;margin-bottom:12px;border:none;border-radius:6px;outline:none}.login-card button{width:100%;padding:12px;border:none;border-radius:6px;background:#fff;color:#092b68;font-weight:bold;cursor:pointer}
-.about{background:#fff}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.about-image{height:330px;border-radius:12px;background:url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80") center/cover}.about h2{color:#092b68;font-size:32px;margin-bottom:15px}.about p{color:#666;line-height:1.8;margin-bottom:12px}
-.programs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.program{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.07)}.program-image{height:160px;background-size:cover;background-position:center}.image-one{background-image:url("https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=800&q=80")}.image-two{background-image:url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80")}.image-three{background-image:url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80")}.program-content{padding:20px}.program-content h3{color:#092b68;margin-bottom:8px}.program-content p{color:#777;font-size:13px;line-height:1.6}
-.stats{background:#092b68;color:#fff;padding:50px 7%;display:grid;grid-template-columns:repeat(4,1fr)}.stat{text-align:center}.stat h2{font-size:35px}.stat p{color:#c8d6eb}
-#readmissionPage{display:none;min-height:100vh;background:#f4f7fb}.readmission-heading{background:#092b68;color:#fff;text-align:center;padding:50px 20px}.readmission-heading h1{font-size:34px;margin-bottom:8px}.readmission-heading p{color:#dce6f5}.form-container{width:92%;max-width:1050px;margin:35px auto 70px}.back-button{border:none;background:#e7edf5;color:#092b68;padding:11px 18px;border-radius:6px;cursor:pointer;font-weight:bold;margin-bottom:18px}.deadline{background:#fff4e5;border:1px solid #ffd39a;color:#714700;padding:15px;border-radius:8px;margin-bottom:20px;line-height:1.6}.form-box{background:#fff;padding:35px;border-radius:13px;box-shadow:0 7px 25px rgba(0,0,0,.07)}.form-section{color:#092b68;font-size:19px;border-bottom:2px solid #edf1f5;padding-bottom:10px;margin:25px 0 18px}.form-section:first-child{margin-top:0}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.form-group{display:flex;flex-direction:column}.full{grid-column:1/-1}.form-group label{font-size:13px;font-weight:bold;margin-bottom:6px}.form-group input,.form-group select,.form-group textarea{padding:12px;border:1px solid #d5dde8;border-radius:7px;outline:none;font-size:14px}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#0b5ed7}.form-group textarea{resize:vertical}.declaration{background:#f6f8fb;border:1px solid #e1e6ed;border-radius:7px;padding:15px}.declaration label{display:flex;gap:10px;line-height:1.6;color:#555;font-size:13px}.declaration input{width:17px;height:17px;margin-top:3px}.form-buttons{display:flex;justify-content:flex-end;gap:12px;margin-top:28px;padding-top:22px;border-top:1px solid #eee}.clear-button,.submit-button{border:none;padding:13px 22px;border-radius:7px;cursor:pointer;font-weight:bold}.clear-button{background:#e8edf3}.submit-button{background:#0b5ed7;color:#fff}
-#deadlinePopup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;padding:20px}.popup{width:100%;max-width:420px;background:#fff;border-radius:14px;padding:32px;text-align:center;box-shadow:0 15px 50px rgba(0,0,0,.25)}.popup-icon{width:60px;height:60px;border-radius:50%;background:#fff1f1;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:27px}.popup h2{color:#092b68;margin-bottom:10px}.popup p{color:#666;line-height:1.6}.close-popup{width:100%;border:none;background:#0b5ed7;color:#fff;padding:12px;margin-top:20px;border-radius:7px;cursor:pointer;font-weight:bold}
-footer{background:#061a3d;color:#fff;padding:35px 7%;text-align:center}footer p{color:#b8c5d9;font-size:13px}
-@media(max-width:850px){nav{display:none;position:absolute;top:75px;left:0;width:100%;background:#fff;padding:20px;box-shadow:0 5px 15px rgba(0,0,0,.1)}nav.active{display:block}nav ul{flex-direction:column}.menu{display:block}.quick{grid-template-columns:repeat(2,1fr)}.notice-area{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.programs{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr);gap:25px}}
-@media(max-width:600px){.topbar{display:none}.hero h1{font-size:32px}.quick{grid-template-columns:1fr}.form-box{padding:20px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.form-buttons{flex-direction:column}.form-buttons button{width:100%}}
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topbar{
+    background:#071d49;
+    color:white;
+    padding:9px 6%;
+    font-size:13px;
+    display:flex;
+    justify-content:space-between;
+}
+
+header{
+    background:white;
+    height:75px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    background:#0b5ed7;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logo h2{
+    color:#092b68;
+    font-size:21px;
+}
+
+.logo small{
+    color:#777;
+    font-size:10px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:22px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:#222;
+    font-size:14px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#0b5ed7;
+}
+
+.login-button{
+    background:#0b5ed7;
+    color:white!important;
+    padding:10px 16px;
+    border-radius:6px;
+}
+
+.menu{
+    display:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    min-height:480px;
+    padding:70px 7%;
+    display:flex;
+    align-items:center;
+    color:white;
+
+    background:
+    linear-gradient(
+        rgba(5,30,70,.90),
+        rgba(5,30,70,.90)
+    ),
+    url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
+}
+
+.hero-content{
+    max-width:700px;
+}
+
+.hero h1{
+    font-size:46px;
+    line-height:1.2;
+    margin-bottom:18px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.7;
+    color:#dce7f6;
+}
+
+.hero-buttons{
+    margin-top:28px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:none;
+    padding:13px 22px;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.primary{
+    background:#0b5ed7;
+    color:white;
+}
+
+.secondary{
+    background:white;
+    color:#092b68;
+}
+
+/* =====================================================
+   QUICK CARDS
+===================================================== */
+
+.quick{
+    width:88%;
+    margin:-40px auto 50px;
+    background:white;
+    border-radius:12px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    box-shadow:0 7px 25px rgba(0,0,0,.10);
+    position:relative;
+    z-index:10;
+    overflow:hidden;
+}
+
+.quick-card{
+    text-align:center;
+    padding:25px 15px;
+    border-right:1px solid #eee;
+}
+
+.quick-card:last-child{
+    border-right:none;
+}
+
+.quick-card .icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.quick-card h3{
+    color:#092b68;
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.quick-card p{
+    color:#777;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.quick-card a{
+    color:#0b5ed7;
+    font-size:12px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+section{
+    padding:65px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    color:#092b68;
+    font-size:32px;
+}
+
+.section-title p{
+    color:#777;
+    margin-top:8px;
+}
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.notice-area{
+    display:grid;
+    grid-template-columns:1.5fr .8fr;
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:27px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.notice{
+    display:flex;
+    gap:15px;
+    padding:17px 0;
+    border-bottom:1px solid #eee;
+}
+
+.notice:last-child{
+    border-bottom:none;
+}
+
+.date{
+    min-width:55px;
+    height:52px;
+    background:#eaf2ff;
+    color:#0b5ed7;
+    border-radius:7px;
+    text-align:center;
+    padding-top:8px;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.notice h4{
+    color:#333;
+    margin-bottom:5px;
+}
+
+.notice p{
+    color:#777;
+    font-size:13px;
+}
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login-card{
+    background:#092b68;
+    color:white;
+}
+
+.login-card h3{
+    margin-bottom:8px;
+}
+
+.login-card p{
+    color:#d5e0f2;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:17px;
+}
+
+.login-card input{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:none;
+    border-radius:6px;
+    outline:none;
+}
+
+.login-card button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:white;
+    color:#092b68;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about{
+    background:white;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    align-items:center;
+}
+
+.about-image{
+    height:330px;
+    border-radius:12px;
+
+    background:
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80")
+    center/cover;
+}
+
+.about h2{
+    color:#092b68;
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.about p{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:12px;
+}
+
+/* =====================================================
+   PROGRAMS
+===================================================== */
+
+.programs{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.program{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+}
+
+.program-image{
+    height:160px;
+    background-size:cover;
+    background-position:center;
+}
+
+.image-one{
+    background-image:url("https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=800&q=80");
+}
+
+.image-two{
+    background-image:url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80");
+}
+
+.image-three{
+    background-image:url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80");
+}
+
+.program-content{
+    padding:20px;
+}
+
+.program-content h3{
+    color:#092b68;
+    margin-bottom:8px;
+}
+
+.program-content p{
+    color:#777;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    background:#092b68;
+    color:white;
+    padding:50px 7%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat h2{
+    font-size:35px;
+}
+
+.stat p{
+    color:#c8d6eb;
+}
+
+/* =====================================================
+   READMISSION PAGE
+===================================================== */
+
+#readmissionPage{
+    display:none;
+    min-height:100vh;
+    background:#f4f7fb;
+}
+
+.readmission-heading{
+    background:#092b68;
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.readmission-heading h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.readmission-heading p{
+    color:#dce6f5;
+}
+
+.form-container{
+    width:92%;
+    max-width:1050px;
+    margin:35px auto 70px;
+}
+
+.back-button{
+    border:none;
+    background:#e7edf5;
+    color:#092b68;
+    padding:11px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.deadline{
+    background:#fff4e5;
+    border:1px solid #ffd39a;
+    color:#714700;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.form-box{
+    background:white;
+    padding:35px;
+    border-radius:13px;
+    box-shadow:0 7px 25px rgba(0,0,0,.07);
+}
+
+.form-section{
+    color:#092b68;
+    font-size:19px;
+    border-bottom:2px solid #edf1f5;
+    padding-bottom:10px;
+    margin:25px 0 18px;
+}
+
+.form-section:first-child{
+    margin-top:0;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border:1px solid #d5dde8;
+    border-radius:7px;
+    outline:none;
+    font-size:14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#0b5ed7;
+}
+
+.form-group textarea{
+    resize:vertical;
+}
+
+.declaration{
+    background:#f6f8fb;
+    border:1px solid #e1e6ed;
+    border-radius:7px;
+    padding:15px;
+}
+
+.declaration label{
+    display:flex;
+    gap:10px;
+    line-height:1.6;
+    color:#555;
+    font-size:13px;
+}
+
+.declaration input{
+    width:17px;
+    height:17px;
+    margin-top:3px;
+}
+
+.form-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:28px;
+    padding-top:22px;
+    border-top:1px solid #eee;
+}
+
+.clear-button,
+.submit-button{
+    border:none;
+    padding:13px 22px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.clear-button{
+    background:#e8edf3;
+}
+
+.submit-button{
+    background:#0b5ed7;
+    color:white;
+}
+
+/* =====================================================
+   SUCCESS PAGE
+===================================================== */
+
+#successPage{
+    display:none;
+    min-height:100vh;
+    background:#f4f7fb;
+}
+
+.success-container{
+    width:92%;
+    max-width:900px;
+    margin:50px auto;
+}
+
+.success-card{
+    background:white;
+    border-radius:15px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+.success-icon{
+    width:75px;
+    height:75px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#e9f9ef;
+    color:#198754;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    font-weight:bold;
+}
+
+.success-card h1{
+    color:#092b68;
+    margin-bottom:10px;
+}
+
+.success-card p{
+    color:#666;
+    line-height:1.7;
+}
+
+.application-number{
+    display:inline-block;
+    background:#edf4ff;
+    color:#092b68;
+    padding:12px 20px;
+    border-radius:7px;
+    margin:20px 0;
+    font-weight:bold;
+}
+
+.success-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.print-button,
+.download-button,
+.home-button{
+    border:none;
+    padding:13px 22px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.print-button{
+    background:#0b5ed7;
+    color:white;
+}
+
+.download-button{
+    background:#198754;
+    color:white;
+}
+
+.home-button{
+    background:#e8edf3;
+    color:#092b68;
+}
+
+/* =====================================================
+   PRINT FORM
+===================================================== */
+
+#printPage{
+    display:none;
+    background:white;
+    min-height:100vh;
+}
+
+.print-container{
+    width:90%;
+    max-width:900px;
+    margin:35px auto;
+}
+
+.print-header{
+    text-align:center;
+    border-bottom:3px solid #092b68;
+    padding-bottom:20px;
+    margin-bottom:25px;
+}
+
+.print-header h1{
+    color:#092b68;
+    margin-bottom:5px;
+}
+
+.print-header p{
+    color:#666;
+}
+
+.print-status{
+    background:#e9f9ef;
+    color:#198754;
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:25px;
+    border-radius:6px;
+}
+
+.print-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:25px;
+}
+
+.print-table th,
+.print-table td{
+    border:1px solid #ccc;
+    padding:11px;
+    text-align:left;
+    font-size:14px;
+}
+
+.print-table th{
+    background:#f1f4f8;
+    width:35%;
+    color:#092b68;
+}
+
+.print-footer{
+    margin-top:35px;
+    border-top:1px solid #ccc;
+    padding-top:20px;
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    color:#666;
+}
+
+.print-actions{
+    text-align:center;
+    margin:30px 0;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+}
+
+.print-actions button{
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.print-now{
+    background:#0b5ed7;
+    color:white;
+}
+
+.back-success{
+    background:#e8edf3;
+    color:#092b68;
+}
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+#deadlinePopup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.popup{
+    width:100%;
+    max-width:420px;
+    background:white;
+    border-radius:14px;
+    padding:32px;
+    text-align:center;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+.popup-icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#fff1f1;
+    margin:0 auto 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+}
+
+.popup h2{
+    color:#092b68;
+    margin-bottom:10px;
+}
+
+.popup p{
+    color:#666;
+    line-height:1.6;
+}
+
+.close-popup{
+    width:100%;
+    border:none;
+    background:#0b5ed7;
+    color:white;
+    padding:12px;
+    margin-top:20px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    background:#061a3d;
+    color:white;
+    padding:35px 7%;
+    text-align:center;
+}
+
+footer p{
+    color:#b8c5d9;
+    font-size:13px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+    nav{
+        display:none;
+        position:absolute;
+        top:75px;
+        left:0;
+        width:100%;
+        background:white;
+        padding:20px;
+        box-shadow:0 5px 15px rgba(0,0,0,.1);
+    }
+
+    nav.active{
+        display:block;
+    }
+
+    nav ul{
+        flex-direction:column;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .quick{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .notice-area{
+        grid-template-columns:1fr;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .programs{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:25px;
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .quick{
+        grid-template-columns:1fr;
+    }
+
+    .form-box{
+        padding:20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .form-buttons{
+        flex-direction:column;
+    }
+
+    .form-buttons button{
+        width:100%;
+    }
+
+    .success-card{
+        padding:25px 18px;
+    }
+
+    .print-footer{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+/* =====================================================
+   PRINT MEDIA
+===================================================== */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    body *{
+        visibility:hidden;
+    }
+
+    #printPage,
+    #printPage *{
+        visibility:visible;
+    }
+
+    #printPage{
+        display:block!important;
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+    }
+
+    .print-actions{
+        display:none!important;
+    }
+
+    .print-container{
+        width:95%;
+        margin:20px auto;
+    }
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="topbar"><span>Academic Management & Student Services</span><span>SAAMS Student Portal</span></div>
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="topbar">
+    <span>Academic Management & Student Services</span>
+    <span>SAAMS Student Portal</span>
+</div>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
-<div class="logo"><div class="logo-icon">S</div><div><h2>SAAMS</h2><small>Student Academic Management System</small></div></div>
-<div class="menu" onclick="toggleMenu()">☰</div>
-<nav id="navigation"><ul>
-<li><a href="#" onclick="showHome();return false;">Home</a></li>
-<li><a href="#about" onclick="showHome();">About</a></li>
-<li><a href="#programs" onclick="showHome();">Programs</a></li>
-<li><a href="#notices" onclick="showHome();">Notices</a></li>
-<li><a href="#" onclick="openReadmission();return false;">Readmission</a></li>
-<li><a href="#login" class="login-button" onclick="showHome();">Student Login</a></li>
-</ul></nav>
+
+    <div class="logo">
+
+        <div class="logo-icon">S</div>
+
+        <div>
+            <h2>SAAMS</h2>
+
+            <small>
+                Student Academic Management System
+            </small>
+        </div>
+
+    </div>
+
+    <div class="menu" onclick="toggleMenu()">☰</div>
+
+    <nav id="navigation">
+
+        <ul>
+
+            <li>
+                <a href="#" onclick="showHome();return false;">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="#about" onclick="showHome();">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="#programs" onclick="showHome();">
+                    Programs
+                </a>
+            </li>
+
+            <li>
+                <a href="#notices" onclick="showHome();">
+                    Notices
+                </a>
+            </li>
+
+            <li>
+                <a href="#" onclick="openReadmission();return false;">
+                    Readmission
+                </a>
+            </li>
+
+            <li>
+                <a href="#login"
+                   class="login-button"
+                   onclick="showHome();">
+                    Student Login
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
 </header>
 
+<!-- =====================================================
+     HOME PAGE
+===================================================== -->
+
 <div id="homePage">
-<section class="hero"><div class="hero-content">
-<h1>Student Academic Management System</h1>
-<p>A modern digital platform for students, faculty and academic administration. Access academic services, notices, results and student facilities from one convenient platform.</p>
-<div class="hero-buttons"><a href="#login" class="btn primary">Student Portal</a><button type="button" class="btn secondary" onclick="openReadmission()">Apply for Readmission</button></div>
-</div></section>
 
-<div class="quick">
-<div class="quick-card"><div class="icon">🎓</div><h3>Student Portal</h3><p>Access your academic dashboard</p><a href="#login">Login →</a></div>
-<div class="quick-card"><div class="icon">📢</div><h3>Notices</h3><p>Important academic updates</p><a href="#notices">View →</a></div>
-<div class="quick-card"><div class="icon">📄</div><h3>Results</h3><p>Check examination results</p><a href="#" onclick="loginMessage();return false;">Check →</a></div>
-<div class="quick-card"><div class="icon">📝</div><h3>Readmission</h3><p>Apply online</p><a href="#" onclick="openReadmission();return false;">Apply Now →</a></div>
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Student Academic Management System
+            </h1>
+
+            <p>
+                A modern digital platform for students,
+                faculty and academic administration.
+                Access academic services, notices,
+                results and student facilities from one
+                convenient platform.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#login" class="btn primary">
+                    Student Portal
+                </a>
+
+                <button
+                    type="button"
+                    class="btn secondary"
+                    onclick="openReadmission()">
+
+                    Apply for Readmission
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- QUICK ACCESS -->
+
+    <div class="quick">
+
+        <div class="quick-card">
+
+            <div class="icon">🎓</div>
+
+            <h3>Student Portal</h3>
+
+            <p>Access your academic dashboard</p>
+
+            <a href="#login">
+                Login →
+            </a>
+
+        </div>
+
+        <div class="quick-card">
+
+            <div class="icon">📢</div>
+
+            <h3>Notices</h3>
+
+            <p>Important academic updates</p>
+
+            <a href="#notices">
+                View →
+            </a>
+
+        </div>
+
+        <div class="quick-card">
+
+            <div class="icon">📄</div>
+
+            <h3>Results</h3>
+
+            <p>Check examination results</p>
+
+            <a href="#">
+                Check →
+            </a>
+
+        </div>
+
+        <div class="quick-card">
+
+            <div class="icon">📝</div>
+
+            <h3>Readmission</h3>
+
+            <p>Apply online</p>
+
+            <a href="#"
+               onclick="openReadmission();return false;">
+                Apply Now →
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- NOTICES -->
+
+    <section id="notices">
+
+        <div class="section-title">
+
+            <h2>Latest Announcements</h2>
+
+            <p>
+                Important information for students
+            </p>
+
+        </div>
+
+        <div class="notice-area">
+
+            <div class="card">
+
+                <div class="notice">
+
+                    <div class="date">
+                        22<br>AUG
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Semester Examination Notification
+                        </h4>
+
+                        <p>
+                            Important information regarding
+                            upcoming semester examinations.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="notice">
+
+                    <div class="date">
+                        20<br>AUG
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Scholarship Renewal Notice
+                        </h4>
+
+                        <p>
+                            Students are advised to complete
+                            their scholarship renewal process.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="notice">
+
+                    <div class="date">
+                        18<br>AUG
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Academic Calendar Updated
+                        </h4>
+
+                        <p>
+                            Latest academic calendar information
+                            is now available.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card login-card" id="login">
+
+                <h3>Student Login</h3>
+
+                <p>
+                    Login to access your academic
+                    information and online services.
+                </p>
+
+                <input
+                    type="text"
+                    placeholder="Registration Number">
+
+                <input
+                    type="password"
+                    placeholder="Password">
+
+                <button onclick="loginMessage()">
+                    Login to Portal
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section class="about" id="about">
+
+        <div class="about-grid">
+
+            <div class="about-image"></div>
+
+            <div>
+
+                <h2>
+                    One Platform for Academic Services
+                </h2>
+
+                <p>
+                    SAAMS provides a unified digital
+                    environment for students and
+                    academic administration.
+                </p>
+
+                <p>
+                    Students can access important
+                    information, notices and academic
+                    services through a simple interface.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <h2>25K+</h2>
+            <p>Students</p>
+        </div>
+
+        <div class="stat">
+            <h2>500+</h2>
+            <p>Faculty</p>
+        </div>
+
+        <div class="stat">
+            <h2>80+</h2>
+            <p>Programs</p>
+        </div>
+
+        <div class="stat">
+            <h2>99%</h2>
+            <p>Digital Services</p>
+        </div>
+
+    </div>
+
+    <!-- PROGRAMS -->
+
+    <section id="programs">
+
+        <div class="section-title">
+
+            <h2>Academic Programs</h2>
+
+        </div>
+
+        <div class="programs">
+
+            <div class="program">
+
+                <div class="program-image image-one"></div>
+
+                <div class="program-content">
+
+                    <h3>
+                        Arts & Humanities
+                    </h3>
+
+                    <p>
+                        Social sciences, humanities,
+                        languages and related disciplines.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="program">
+
+                <div class="program-image image-two"></div>
+
+                <div class="program-content">
+
+                    <h3>
+                        Commerce & Management
+                    </h3>
+
+                    <p>
+                        Business, finance, economics
+                        and management studies.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="program">
+
+                <div class="program-image image-three"></div>
+
+                <div class="program-content">
+
+                    <h3>
+                        Science & Technology
+                    </h3>
+
+                    <p>
+                        Scientific and technological
+                        academic programs.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </div>
 
-<section id="notices"><div class="section-title"><h2>Latest Announcements</h2><p>Important information for students</p></div>
-<div class="notice-area"><div class="card">
-<div class="notice"><div class="date">22<br>AUG</div><div><h4>Semester Examination Notification</h4><p>Important information regarding upcoming semester examinations.</p></div></div>
-<div class="notice"><div class="date">20<br>AUG</div><div><h4>Scholarship Renewal Notice</h4><p>Students are advised to complete their scholarship renewal process.</p></div></div>
-<div class="notice"><div class="date">18<br>AUG</div><div><h4>Academic Calendar Updated</h4><p>Latest academic calendar information is now available.</p></div></div>
-</div>
-<div class="card login-card" id="login"><h3>Student Login</h3><p>Login to access your academic information and online services.</p><input id="regNo" type="text" placeholder="Registration Number"><input id="password" type="password" placeholder="Password"><button onclick="loginMessage()">Login to Portal</button></div>
-</div></section>
-
-<section class="about" id="about"><div class="about-grid"><div class="about-image"></div><div><h2>One Platform for Academic Services</h2><p>SAAMS provides a unified digital environment for students and academic administration.</p><p>Students can access important information, notices and academic services through a simple interface.</p></div></div></section>
-
-<section id="programs"><div class="section-title"><h2>Academic Programs</h2><p>Explore our academic facilities and programs</p></div>
-<div class="programs">
-<div class="program"><div class="program-image image-one"></div><div class="program-content"><h3>Undergraduate Programs</h3><p>Explore undergraduate academic programs and student services.</p></div></div>
-<div class="program"><div class="program-image image-two"></div><div class="program-content"><h3>Academic Management</h3><p>Manage academic information, schedules and important activities.</p></div></div>
-<div class="program"><div class="program-image image-three"></div><div class="program-content"><h3>Digital Student Services</h3><p>Access online academic resources and student facilities.</p></div></div>
-</div></section>
-
-<div class="stats">
-<div class="stat"><h2>25K+</h2><p>Students</p></div><div class="stat"><h2>500+</h2><p>Faculty</p></div><div class="stat"><h2>80+</h2><p>Programs</p></div><div class="stat"><h2>24/7</h2><p>Online Access</p></div>
-</div>
-</div>
+<!-- =====================================================
+     READMISSION PAGE
+===================================================== -->
 
 <div id="readmissionPage">
-<div class="readmission-heading"><h1>Student Readmission</h1><p>Complete the online readmission application form</p></div>
-<div class="form-container">
-<button class="back-button" onclick="showHome()">← Back to Home</button>
-<div class="deadline"><strong>Important:</strong> Please complete your readmission application before the prescribed deadline. Submit accurate information and verify all details before submitting.</div>
-<form class="form-box" id="readmissionForm" onsubmit="submitReadmission(event)">
-<h3 class="form-section">Personal Information</h3>
-<div class="form-grid">
-<div class="form-group"><label>Full Name *</label><input required type="text" name="name" placeholder="Enter full name"></div>
-<div class="form-group"><label>Registration Number *</label><input required type="text" name="reg" placeholder="Enter registration number"></div>
-<div class="form-group"><label>Date of Birth *</label><input required type="date" name="dob"></div>
-<div class="form-group"><label>Gender *</label><select required name="gender"><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
-<div class="form-group"><label>Mobile Number *</label><input required type="tel" name="mobile" placeholder="Enter mobile number"></div>
-<div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="Enter email address"></div>
-</div>
-<h3 class="form-section">Academic Information</h3>
-<div class="form-grid">
-<div class="form-group"><label>Course / Program *</label><input required type="text" name="course" placeholder="Enter course or program"></div>
-<div class="form-group"><label>Year / Semester *</label><select required name="semester"><option value="">Select</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>1st Semester</option><option>2nd Semester</option><option>3rd Semester</option><option>4th Semester</option><option>5th Semester</option><option>6th Semester</option></select></div>
-<div class="form-group full"><label>Previous Academic Status</label><textarea rows="4" name="status" placeholder="Enter relevant academic details"></textarea></div>
-</div>
-<h3 class="form-section">Address</h3>
-<div class="form-grid">
-<div class="form-group full"><label>Address *</label><textarea required rows="4" name="address" placeholder="Enter complete address"></textarea></div>
-<div class="form-group"><label>City *</label><input required type="text" name="city" placeholder="Enter city"></div>
-<div class="form-group"><label>State *</label><input required type="text" name="state" placeholder="Enter state"></div>
-</div>
-<h3 class="form-section">Declaration</h3>
-<div class="declaration"><label><input required type="checkbox" name="declaration"><span>I declare that the information provided by me is true and correct to the best of my knowledge. I understand that submission of false information may result in cancellation of my application.</span></label></div>
-<div class="form-buttons"><button type="reset" class="clear-button">Clear Form</button><button type="submit" class="submit-button">Submit Application</button></div>
-</form>
-</div>
+
+    <div class="readmission-heading">
+
+        <h1>
+            Readmission Application
+        </h1>
+
+        <p>
+            Student Academic Management System
+        </p>
+
+    </div>
+
+    <div class="form-container">
+
+        <button
+            type="button"
+            class="back-button"
+            onclick="showHome()">
+
+            ← Back to Home
+
+        </button>
+
+        <div class="deadline">
+
+            <strong>Important Notice:</strong>
+
+            Please fill in all required information
+            carefully.
+
+            The readmission deadline was
+            <strong>21 August 2026</strong>.
+
+        </div>
+
+        <form id="readmissionForm" class="form-box">
+
+            <h3 class="form-section">
+                Student Information
+            </h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Student Name *</label>
+
+                    <input
+                        id="studentName"
+                        type="text"
+                        placeholder="Enter student name"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Roll Number *</label>
+
+                    <input
+                        id="rollNumber"
+                        type="text"
+                        placeholder="Enter roll number"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Barcode Number *</label>
+
+                    <input
+                        id="barcodeNumber"
+                        type="text"
+                        placeholder="Enter barcode number"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>SAAMS Registration Number *</label>
+
+                    <input
+                        id="registrationNumber"
+                        type="text"
+                        placeholder="Enter registration number"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Date of Birth *</label>
+
+                    <input
+                        id="dob"
+                        type="date"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Gender *</label>
+
+                    <select id="gender" required>
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Mobile Number *</label>
+
+                    <input
+                        id="mobile"
+                        type="tel"
+                        placeholder="Enter mobile number"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Email Address</label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Enter email">
+
+                </div>
+
+            </div>
+
+            <h3 class="form-section">
+                Academic Information
+            </h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Major Paper *</label>
+
+                    <input
+                        id="majorPaper"
+                        type="text"
+                        placeholder="Enter major paper"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Minor Paper</label>
+
+                    <input
+                        id="minorPaper"
+                        type="text"
+                        placeholder="Enter minor paper">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Course / Programme *</label>
+
+                    <select id="course" required>
+
+                        <option value="">
+                            Select Course
+                        </option>
+
+                        <option>BA</option>
+                        <option>B.Sc.</option>
+                        <option>B.Com.</option>
+                        <option>MA</option>
+                        <option>M.Sc.</option>
+                        <option>M.Com.</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Department *</label>
+
+                    <input
+                        id="department"
+                        type="text"
+                        placeholder="Enter department"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Course Year *</label>
+
+                    <select id="courseYear" required>
+
+                        <option value="">
+                            Select Year
+                        </option>
+
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Current Semester *</label>
+
+                    <select id="semester" required>
+
+                        <option value="">
+                            Select Semester
+                        </option>
+
+                        <option>1st Semester</option>
+                        <option>2nd Semester</option>
+                        <option>3rd Semester</option>
+                        <option>4th Semester</option>
+                        <option>5th Semester</option>
+                        <option>6th Semester</option>
+                        <option>7th Semester</option>
+                        <option>8th Semester</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Academic Session *</label>
+
+                    <select id="session" required>
+
+                        <option value="">
+                            Select Session
+                        </option>
+
+                        <option>2026-27</option>
+                        <option>2025-26</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Attendance Percentage *</label>
+
+                    <input
+                        id="attendance"
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.01"
+                        placeholder="Example: 82.50"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Previous Semester Result *</label>
+
+                    <select id="previousResult" required>
+
+                        <option value="">
+                            Select Status
+                        </option>
+
+                        <option>Passed</option>
+                        <option>Promoted</option>
+                        <option>Backlog</option>
+                        <option>Failed</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Admission Year *</label>
+
+                    <input
+                        id="admissionYear"
+                        type="number"
+                        placeholder="Example: 2024"
+                        required>
+
+                </div>
+
+            </div>
+
+            <h3 class="form-section">
+                Address Information
+            </h3>
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+
+                    <label>Full Address *</label>
+
+                    <textarea
+                        id="address"
+                        rows="4"
+                        placeholder="Enter complete address"
+                        required></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>District *</label>
+
+                    <input
+                        id="district"
+                        type="text"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>State *</label>
+
+                    <input
+                        id="state"
+                        type="text"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>PIN Code *</label>
+
+                    <input
+                        id="pin"
+                        type="text"
+                        required>
+
+                </div>
+
+            </div>
+
+            <h3 class="form-section">
+                Declaration
+            </h3>
+
+            <div class="declaration">
+
+                <label>
+
+                    <input
+                        id="declaration"
+                        type="checkbox"
+                        required>
+
+                    <span>
+                        I hereby declare that all information
+                        provided by me is true and correct
+                        to the best of my knowledge.
+                    </span>
+
+                </label>
+
+            </div>
+
+            <div class="form-buttons">
+
+                <button
+                    type="reset"
+                    class="clear-button">
+
+                    Clear Form
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="submit-button">
+
+                    Submit Readmission Form
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
-<div id="deadlinePopup"><div class="popup"><div class="popup-icon">⚠️</div><h2 id="popupTitle">Notice</h2><p id="popupMessage">Message</p><button class="close-popup" onclick="closePopup()">Close</button></div></div>
+<!-- =====================================================
+     SUCCESS PAGE
+===================================================== -->
 
-<footer><p>© 2026 SAAMS - Student Academic Management System. All Rights Reserved.</p></footer>
+<div id="successPage">
+
+    <div class="readmission-heading">
+
+        <h1>
+            Readmission Application
+        </h1>
+
+        <p>
+            Application Status
+        </p>
+
+    </div>
+
+    <div class="success-container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>
+                Application Submitted Successfully
+            </h1>
+
+            <p>
+                Your readmission application has been
+                successfully submitted.
+            </p>
+
+            <div class="application-number">
+
+                Application No:
+                <span id="applicationNumber">
+                    SAAMS-000000
+                </span>
+
+            </div>
+
+            <p>
+                Please keep this application number
+                for your records.
+            </p>
+
+            <div class="success-buttons">
+
+                <button
+                    class="print-button"
+                    onclick="openPrintPage()">
+
+                    🖨️ View / Print Form
+
+                </button>
+
+                <button
+                    class="download-button"
+                    onclick="downloadPrintForm()">
+
+                    ⬇️ Download Print Form
+
+                </button>
+
+                <button
+                    class="home-button"
+                    onclick="showHome()">
+
+                    ← Home
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     PRINT PAGE
+===================================================== -->
+
+<div id="printPage">
+
+    <div class="print-container">
+
+        <div class="print-header">
+
+            <h1>
+                SAAMS
+            </h1>
+
+            <p>
+                Student Academic Management System
+            </p>
+
+            <h2>
+                READMISSION APPLICATION FORM
+            </h2>
+
+        </div>
+
+        <div class="print-status">
+
+            ✓ APPLICATION SUBMITTED SUCCESSFULLY
+
+        </div>
+
+        <table class="print-table">
+
+            <tr>
+                <th>Application Number</th>
+                <td id="p_application"></td>
+            </tr>
+
+            <tr>
+                <th>Student Name</th>
+                <td id="p_name"></td>
+            </tr>
+
+            <tr>
+                <th>Roll Number</th>
+                <td id="p_roll"></td>
+            </tr>
+
+            <tr>
+                <th>Barcode Number</th>
+                <td id="p_barcode"></td>
+            </tr>
+
+            <tr>
+                <th>SAAMS Registration Number</th>
+                <td id="p_registration"></td>
+            </tr>
+
+            <tr>
+                <th>Date of Birth</th>
+                <td id="p_dob"></td>
+            </tr>
+
+            <tr>
+                <th>Gender</th>
+                <td id="p_gender"></td>
+            </tr>
+
+            <tr>
+                <th>Mobile Number</th>
+                <td id="p_mobile"></td>
+            </tr>
+
+            <tr>
+                <th>Email Address</th>
+                <td id="p_email"></td>
+            </tr>
+
+            <tr>
+                <th>Major Paper</th>
+                <td id="p_major"></td>
+            </tr>
+
+            <tr>
+                <th>Minor Paper</th>
+                <td id="p_minor"></td>
+            </tr>
+
+            <tr>
+                <th>Course / Programme</th>
+                <td id="p_course"></td>
+            </tr>
+
+            <tr>
+                <th>Department</th>
+                <td id="p_department"></td>
+            </tr>
+
+            <tr>
+                <th>Course Year</th>
+                <td id="p_year"></td>
+            </tr>
+
+            <tr>
+                <th>Current Semester</th>
+                <td id="p_semester"></td>
+            </tr>
+
+            <tr>
+                <th>Academic Session</th>
+                <td id="p_session"></td>
+            </tr>
+
+            <tr>
+                <th>Attendance Percentage</th>
+                <td id="p_attendance"></td>
+            </tr>
+
+            <tr>
+                <th>Previous Semester Result</th>
+                <td id="p_result"></td>
+            </tr>
+
+            <tr>
+                <th>Admission Year</th>
+                <td id="p_admission"></td>
+            </tr>
+
+            <tr>
+                <th>Full Address</th>
+                <td id="p_address"></td>
+            </tr>
+
+            <tr>
+                <th>District</th>
+                <td id="p_district"></td>
+            </tr>
+
+            <tr>
+                <th>State</th>
+                <td id="p_state"></td>
+            </tr>
+
+            <tr>
+                <th>PIN Code</th>
+                <td id="p_pin"></td>
+            </tr>
+
+        </table>
+
+        <div class="print-footer">
+
+            <div>
+                <strong>Declaration:</strong><br>
+                The applicant has declared that the
+                information provided is correct.
+            </div>
+
+            <div>
+                Date:
+                <span id="p_date"></span>
+            </div>
+
+        </div>
+
+        <div class="print-actions">
+
+            <button
+                class="print-now"
+                onclick="window.print()">
+
+                🖨️ Print / Save as PDF
+
+            </button>
+
+            <button
+                class="back-success"
+                onclick="backToSuccess()">
+
+                ← Back
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     DEADLINE POPUP
+===================================================== -->
+
+<div id="deadlinePopup">
+
+    <div class="popup">
+
+        <div class="popup-icon">
+            ⚠️
+        </div>
+
+        <h2>
+            Readmission Closed
+        </h2>
+
+        <p>
+
+            The readmission deadline was
+            <strong>21 August 2026</strong>.
+
+            <br><br>
+
+            The readmission application window
+            is now closed.
+
+        </p>
+
+        <button
+            type="button"
+            class="close-popup"
+            onclick="closePopup()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 SAAMS - Student Academic Management System.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script>
-function toggleMenu(){document.getElementById("navigation").classList.toggle("active")}
-function showHome(){
- document.getElementById("homePage").style.display="block";
- document.getElementById("readmissionPage").style.display="none";
- document.getElementById("navigation").classList.remove("active");
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+function toggleMenu(){
+
+    var nav=document.getElementById("navigation");
+
+    nav.classList.toggle("active");
+
 }
+
+/* =====================================================
+   OPEN READMISSION
+===================================================== */
+
 function openReadmission(){
- document.getElementById("homePage").style.display="none";
- document.getElementById("readmissionPage").style.display="block";
- document.getElementById("navigation").classList.remove("active");
- window.scrollTo({top:0,behavior:"smooth"});
+
+    document.getElementById("homePage").style.display="none";
+    document.getElementById("successPage").style.display="none";
+    document.getElementById("printPage").style.display="none";
+
+    document.getElementById("readmissionPage").style.display="block";
+
+    window.scrollTo(0,0);
+
 }
-function showPopup(title,message){
- document.getElementById("popupTitle").textContent=title;
- document.getElementById("popupMessage").textContent=message;
- document.getElementById("deadlinePopup").style.display="flex";
+
+/* =====================================================
+   SHOW HOME
+===================================================== */
+
+function showHome(){
+
+    document.getElementById("readmissionPage").style.display="none";
+    document.getElementById("successPage").style.display="none";
+    document.getElementById("printPage").style.display="none";
+
+    document.getElementById("homePage").style.display="block";
+
+    window.scrollTo(0,0);
+
 }
-function closePopup(){document.getElementById("deadlinePopup").style.display="none"}
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
 function loginMessage(){
- const reg=document.getElementById("regNo").value.trim();
- const pass=document.getElementById("password").value.trim();
- if(!reg||!pass) showPopup("Login Required","Please enter your registration number and password.");
- else showPopup("Demo Portal","Login functionality is currently a demo. Connect this form to your backend/database to enable real authentication.");
+
+    alert(
+        "Student login system will be connected to the backend."
+    );
+
 }
-function submitReadmission(event){
- event.preventDefault();
- showPopup("Application Submitted","Your readmission application has been submitted successfully in this demo. A real submission system requires a backend/database connection.");
- event.target.reset();
+
+/* =====================================================
+   SAFE TEXT FUNCTION
+===================================================== */
+
+function getValue(id){
+
+    var element=document.getElementById(id);
+
+    if(!element){
+        return "";
+    }
+
+    return element.value.trim();
+
 }
-window.addEventListener("click",function(e){if(e.target===document.getElementById("deadlinePopup"))closePopup()});
+
+/* =====================================================
+   GENERATE APPLICATION NUMBER
+===================================================== */
+
+function generateApplicationNumber(){
+
+    var now=new Date();
+
+    var random=Math.floor(1000+Math.random()*9000);
+
+    return "SAAMS-" +
+           now.getFullYear() +
+           "-" +
+           random;
+
+}
+
+/* =====================================================
+   FORM SUBMISSION
+===================================================== */
+
+document.getElementById("readmissionForm").addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+        /* Generate application number */
+
+        var applicationNumber=
+            generateApplicationNumber();
+
+        document.getElementById(
+            "applicationNumber"
+        ).textContent=applicationNumber;
+
+        /* Store application data */
+
+        var applicationData={
+
+            applicationNumber:applicationNumber,
+
+            name:getValue("studentName"),
+
+            roll:getValue("rollNumber"),
+
+            barcode:getValue("barcodeNumber"),
+
+            registration:getValue("registrationNumber"),
+
+            dob:getValue("dob"),
+
+            gender:getValue("gender"),
+
+            mobile:getValue("mobile"),
+
+            email:getValue("email"),
+
+            major:getValue("majorPaper"),
+
+            minor:getValue("minorPaper"),
+
+            course:getValue("course"),
+
+            department:getValue("department"),
+
+            year:getValue("courseYear"),
+
+            semester:getValue("semester"),
+
+            session:getValue("session"),
+
+            attendance:getValue("attendance"),
+
+            result:getValue("previousResult"),
+
+            admission:getValue("admissionYear"),
+
+            address:getValue("address"),
+
+            district:getValue("district"),
+
+            state:getValue("state"),
+
+            pin:getValue("pin"),
+
+            date:new Date().toLocaleDateString("en-IN")
+
+        };
+
+        /* Save temporarily in browser */
+
+        sessionStorage.setItem(
+            "saamsApplication",
+            JSON.stringify(applicationData)
+        );
+
+        /* Show success page */
+
+        document.getElementById(
+            "readmissionPage"
+        ).style.display="none";
+
+        document.getElementById(
+            "successPage"
+        ).style.display="block";
+
+        window.scrollTo(0,0);
+
+    }
+);
+
+/* =====================================================
+   OPEN PRINT PAGE
+===================================================== */
+
+function openPrintPage(){
+
+    var saved=
+        sessionStorage.getItem("saamsApplication");
+
+    if(!saved){
+
+        alert(
+            "Application information is not available."
+        );
+
+        return;
+
+    }
+
+    var data=JSON.parse(saved);
+
+    /* Fill printable form */
+
+    document.getElementById("p_application").textContent=
+        data.applicationNumber;
+
+    document.getElementById("p_name").textContent=
+        data.name;
+
+    document.getElementById("p_roll").textContent=
+        data.roll;
+
+    document.getElementById("p_barcode").textContent=
+        data.barcode;
+
+    document.getElementById("p_registration").textContent=
+        data.registration;
+
+    document.getElementById("p_dob").textContent=
+        data.dob;
+
+    document.getElementById("p_gender").textContent=
+        data.gender;
+
+    document.getElementById("p_mobile").textContent=
+        data.mobile;
+
+    document.getElementById("p_email").textContent=
+        data.email || "Not provided";
+
+    document.getElementById("p_major").textContent=
+        data.major;
+
+    document.getElementById("p_minor").textContent=
+        data.minor || "Not provided";
+
+    document.getElementById("p_course").textContent=
+        data.course;
+
+    document.getElementById("p_department").textContent=
+        data.department;
+
+    document.getElementById("p_year").textContent=
+        data.year;
+
+    document.getElementById("p_semester").textContent=
+        data.semester;
+
+    document.getElementById("p_session").textContent=
+        data.session;
+
+    document.getElementById("p_attendance").textContent=
+        data.attendance + "%";
+
+    document.getElementById("p_result").textContent=
+        data.result;
+
+    document.getElementById("p_admission").textContent=
+        data.admission;
+
+    document.getElementById("p_address").textContent=
+        data.address;
+
+    document.getElementById("p_district").textContent=
+        data.district;
+
+    document.getElementById("p_state").textContent=
+        data.state;
+
+    document.getElementById("p_pin").textContent=
+        data.pin;
+
+    document.getElementById("p_date").textContent=
+        data.date;
+
+    /* Switch pages */
+
+    document.getElementById("successPage").style.display=
+        "none";
+
+    document.getElementById("printPage").style.display=
+        "block";
+
+    window.scrollTo(0,0);
+
+}
+
+/* =====================================================
+   DOWNLOAD PRINT FORM
+===================================================== */
+
+function downloadPrintForm(){
+
+    var saved=
+        sessionStorage.getItem("saamsApplication");
+
+    if(!saved){
+
+        alert(
+            "Application information is not available."
+        );
+
+        return;
+
+    }
+
+    var data=JSON.parse(saved);
+
+    var html=`
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>SAAMS Readmission Application</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    padding:30px;
+    color:#222;
+}
+
+h1,h2{
+    text-align:center;
+    color:#092b68;
+}
+
+.header{
+    text-align:center;
+    border-bottom:3px solid #092b68;
+    padding-bottom:15px;
+    margin-bottom:25px;
+}
+
+.status{
+    background:#e9f9ef;
+    color:#198754;
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:left;
+}
+
+th{
+    background:#f1f4f8;
+    width:35%;
+    color:#092b68;
+}
+
+.footer{
+    margin-top:30px;
+    border-top:1px solid #ccc;
+    padding-top:15px;
+}
+
+@media print{
+
+    .no-print{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>SAAMS</h1>
+
+<p>Student Academic Management System</p>
+
+<h2>READMISSION APPLICATION FORM</h2>
+
+</div>
+
+<div class="status">
+✓ APPLICATION SUBMITTED SUCCESSFULLY
+</div>
+
+<table>
+
+<tr>
+<th>Application Number</th>
+<td>${escapeHTML(data.applicationNumber)}</td>
+</tr>
+
+<tr>
+<th>Student Name</th>
+<td>${escapeHTML(data.name)}</td>
+</tr>
+
+<tr>
+<th>Roll Number</th>
+<td>${escapeHTML(data.roll)}</td>
+</tr>
+
+<tr>
+<th>Barcode Number</th>
+<td>${escapeHTML(data.barcode)}</td>
+</tr>
+
+<tr>
+<th>SAAMS Registration Number</th>
+<td>${escapeHTML(data.registration)}</td>
+</tr>
+
+<tr>
+<th>Date of Birth</th>
+<td>${escapeHTML(data.dob)}</td>
+</tr>
+
+<tr>
+<th>Gender</th>
+<td>${escapeHTML(data.gender)}</td>
+</tr>
+
+<tr>
+<th>Mobile Number</th>
+<td>${escapeHTML(data.mobile)}</td>
+</tr>
+
+<tr>
+<th>Email Address</th>
+<td>${escapeHTML(data.email || "Not provided")}</td>
+</tr>
+
+<tr>
+<th>Major Paper</th>
+<td>${escapeHTML(data.major)}</td>
+</tr>
+
+<tr>
+<th>Minor Paper</th>
+<td>${escapeHTML(data.minor || "Not provided")}</td>
+</tr>
+
+<tr>
+<th>Course / Programme</th>
+<td>${escapeHTML(data.course)}</td>
+</tr>
+
+<tr>
+<th>Department</th>
+<td>${escapeHTML(data.department)}</td>
+</tr>
+
+<tr>
+<th>Course Year</th>
+<td>${escapeHTML(data.year)}</td>
+</tr>
+
+<tr>
+<th>Current Semester</th>
+<td>${escapeHTML(data.semester)}</td>
+</tr>
+
+<tr>
+<th>Academic Session</th>
+<td>${escapeHTML(data.session)}</td>
+</tr>
+
+<tr>
+<th>Attendance Percentage</th>
+<td>${escapeHTML(data.attendance)}%</td>
+</tr>
+
+<tr>
+<th>Previous Semester Result</th>
+<td>${escapeHTML(data.result)}</td>
+</tr>
+
+<tr>
+<th>Admission Year</th>
+<td>${escapeHTML(data.admission)}</td>
+</tr>
+
+<tr>
+<th>Full Address</th>
+<td>${escapeHTML(data.address)}</td>
+</tr>
+
+<tr>
+<th>District</th>
+<td>${escapeHTML(data.district)}</td>
+</tr>
+
+<tr>
+<th>State</th>
+<td>${escapeHTML(data.state)}</td>
+</tr>
+
+<tr>
+<th>PIN Code</th>
+<td>${escapeHTML(data.pin)}</td>
+</tr>
+
+</table>
+
+<div class="footer">
+
+<strong>Declaration:</strong><br>
+
+The applicant has declared that the information
+provided is correct.
+
+<br><br>
+
+<strong>Application Date:</strong>
+${escapeHTML(data.date)}
+
+</div>
+
+<br>
+
+<button
+class="no-print"
+onclick="window.print()">
+
+Print / Save as PDF
+
+</button>
+
+</body>
+
+</html>
+
+`;
+
+    var blob=new Blob(
+        [html],
+        {type:"text/html"}
+    );
+
+    var url=URL.createObjectURL(blob);
+
+    var link=document.createElement("a");
+
+    link.href=url;
+
+    link.download=
+        data.applicationNumber +
+        "_Readmission_Form.html";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+}
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    if(value===undefined || value===null){
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+/* =====================================================
+   BACK TO SUCCESS
+===================================================== */
+
+function backToSuccess(){
+
+    document.getElementById(
+        "printPage"
+    ).style.display="none";
+
+    document.getElementById(
+        "successPage"
+    ).style.display="block";
+
+    window.scrollTo(0,0);
+
+}
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+function closePopup(){
+
+    document.getElementById(
+        "deadlinePopup"
+    ).style.display="none";
+
+}
+
 </script>
+
 </body>
 </html>
