@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SAAMS — Administrator Dashboard</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#1d2939;
+}
+
+
+.topbar{
+    background:#071d46;
+    color:#fff;
+    padding:8px 5%;
+    font-size:12px;
+    display:flex;
+    justify-content:space-between;
+}
+
+
+header{
+    background:#092b68;
+    color:#fff;
+    padding:16px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:9px;
+    background:#fff;
+    color:#092b68;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+    font-size:23px;
+}
+
+
+.logo h2{
+    margin:0;
+    font-size:21px;
+}
+
+
+.logo small{
+    opacity:.8;
+}
+
+
+.container{
+    width:92%;
+    max-width:1250px;
+    margin:30px auto;
+}
+
+
+.card{
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 7px 25px rgba(0,0,0,.07);
+    padding:25px;
+}
+
+
+.login-wrap{
+    max-width:450px;
+    margin:60px auto;
+}
+
+
+.login-wrap h1{
+    margin-top:0;
+    color:#092b68;
+}
+
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin:15px 0 6px;
+}
+
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #d5dde8;
+    border-radius:7px;
+    font-size:14px;
+}
+
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:12px 18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+.primary{
+    background:#0b5ed7;
+    color:#fff;
+    width:100%;
+    margin-top:20px;
+}
+
+
+.secondary{
+    background:#e8edf3;
+    color:#092b68;
+}
+
+
+.hidden{
+    display:none!important;
+}
+
+
+.message{
+    margin-top:15px;
+    padding:12px;
+    border-radius:7px;
+    display:none;
+    font-size:13px;
+}
+
+
+.error{
+    background:#fdecec;
+    color:#a11;
+}
+
+
+.success{
+    background:#eaf7ee;
+    color:#166534;
+}
+
+
+.dashboard-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin:20px 0;
+}
+
+
+.stat{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
+}
+
+
+.stat h2{
+    margin:0;
+    color:#092b68;
+}
+
+
+.toolbar{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:18px 0;
+}
+
+
+.toolbar input{
+    flex:1;
+    min-width:220px;
+}
+
+
+.toolbar button{
+    white-space:nowrap;
+}
+
+
+.table-wrap{
+    overflow:auto;
+}
+
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
+
+
+.table th,
+.table td{
+    padding:11px;
+    border-bottom:1px solid #edf1f5;
+    text-align:left;
+    font-size:13px;
+    vertical-align:top;
+}
+
+
+.table th{
+    background:#f7f9fc;
+    color:#092b68;
+}
+
+
+.badge{
+    background:#eaf2ff;
+    color:#0b5ed7;
+    border-radius:20px;
+    padding:5px 9px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:10;
+}
+
+
+.modal-box{
+    background:#fff;
+    max-width:850px;
+    width:100%;
+    max-height:88vh;
+    overflow:auto;
+    border-radius:13px;
+    padding:25px;
+}
+
+
+.modal-box h2{
+    color:#092b68;
+}
+
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+
+.detail{
+    background:#f7f9fc;
+    padding:12px;
+    border-radius:7px;
+}
+
+
+.detail strong{
+    display:block;
+    font-size:11px;
+    color:#667085;
+    margin-bottom:4px;
+}
+
+
+.detail span{
+    font-size:14px;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        display:none;
+    }
+
+    header{
+        padding:13px 4%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+
+    <span>
+        SAAMS Administrator Area
+    </span>
+
+    <span>
+        Protected Dashboard
+    </span>
+
+</div>
+
+
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            S
+        </div>
+
+        <div>
+
+            <h2>
+                SAAMS
+            </h2>
+
+            <small>
+                Administrator Dashboard
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <button
+        id="logoutBtn"
+        class="secondary hidden"
+        onclick="logout()"
+    >
+        Logout
+    </button>
+
+</header>
+
+
+
+<main class="container">
+
+
+<!-- ================= LOGIN ================= -->
+
+<section
+    id="loginSection"
+    class="card login-wrap"
+>
+
+    <h1>
+        Administrator Login
+    </h1>
+
+    <p>
+        Sign in with the administrator account
+        created in Supabase Authentication.
+    </p>
+
+
+    <label for="email">
+        Admin Email
+    </label>
+
+    <input
+        id="email"
+        type="email"
+        autocomplete="username"
+        placeholder="Enter admin email"
+    >
+
+
+    <label for="password">
+        Password
+    </label>
+
+    <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter password"
+    >
+
+
+    <button
+        class="primary"
+        onclick="login()"
+    >
+        Login as Administrator
+    </button>
+
+
+    <div
+        id="loginMessage"
+        class="message"
+    ></div>
+
+</section>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section
+    id="dashboardSection"
+    class="hidden"
+>
+
+
+<div class="dashboard-head">
+
+    <div>
+
+        <h1 style="margin-bottom:5px;color:#092b68">
+
+            Readmission Applications
+
+        </h1>
+
+        <p
+            id="adminEmail"
+            style="margin-top:0;color:#667085"
+        ></p>
+
+    </div>
+
+
+    <button
+        class="secondary"
+        onclick="loadApplications()"
+    >
+
+        ↻ Refresh
+
+    </button>
+
+</div>
+
+
+
+<!-- ================= STATISTICS ================= -->
+
+<div class="stats">
+
+
+    <div class="stat">
+
+        <h2 id="totalCount">
+            0
+        </h2>
+
+        <p>
+            Total Applications
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2 id="todayCount">
+            0
+        </h2>
+
+        <p>
+            Submitted Today
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2 id="visibleCount">
+            0
+        </h2>
+
+        <p>
+            Currently Shown
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================= APPLICATION TABLE ================= -->
+
+<div class="card">
+
+
+    <div class="toolbar">
+
+        <input
+            id="search"
+            type="search"
+            placeholder="Search name, registration number, course, city..."
+            oninput="renderApplications()"
+        >
+
+
+        <button
+            class="secondary"
+            onclick="exportCSV()"
+        >
+            Export CSV
+        </button>
+
+    </div>
+
+
+    <div
+        id="dashboardMessage"
+        class="message"
+    ></div>
+
+
+    <div class="table-wrap">
+
+
+        <table class="table">
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Reference
+                    </th>
+
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Registration
+                    </th>
+
+                    <th>
+                        Course
+                    </th>
+
+                    <th>
+                        Contact
+                    </th>
+
+                    <th>
+                        Submitted
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="applicationsBody">
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================= DETAILS MODAL ================= -->
+
+<div
+    id="detailModal"
+    class="modal"
+    onclick="if(event.target===this)closeDetails()"
+>
+
+
+    <div class="modal-box">
+
+
+        <h2>
+            Application Details
+        </h2>
+
+
+        <div
+            id="detailGrid"
+            class="detail-grid"
+        ></div>
+
+
+        <div
+            style="display:flex;justify-content:flex-end;margin-top:20px"
+        >
+
+            <button
+                class="secondary"
+                onclick="closeDetails()"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= SUPABASE ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase-config.js"></script>
+
+
+
+<script>
+
+const db =
+    window.saamsSupabase;
+
+
+let applications = [];
+
+
+
+/* ================= MESSAGE ================= */
+
+function message(
+    element,
+    text,
+    type
+){
+
+    element.textContent =
+        text;
+
+    element.className =
+        "message " + type;
+
+    element.style.display =
+        "block";
+
+}
+
+
+
+/* ================= SECURITY ================= */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ""
+    ).replace(
+        /[&<>"']/g,
+        function(character){
+
+            return {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+
+            }[character];
+
+        }
+    );
+
+}
+
+
+
+/* ================= DATE ================= */
+
+function formatDate(value){
+
+    if(!value){
+        return "";
+    }
+
+    return new Date(
+        value
+    ).toLocaleString();
+
+}
+
+
+
+/* ================= ADMIN LOGIN ================= */
+
+async function login(){
+
+    const msg =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    if(!db){
+
+        message(
+            msg,
+            "Configure supabase-config.js first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+
+    if(
+        !email ||
+        !password
+    ){
+
+        message(
+            msg,
+            "Enter both email and password.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } = await db.auth.signInWithPassword({
+
+        email:email,
+
+        password:password
+
+    });
+
+
+    if(error){
+
+        message(
+            msg,
+            "Login failed. Check your credentials.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    await checkAdminAndOpen();
+
+}
+
+
+
+/* ================= CHECK ADMIN ================= */
+
+async function checkAdminAndOpen(){
+
+    const {
+        data:{
+            user
+        }
+    } = await db.auth.getUser();
+
+
+    if(!user){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    const {
+        data:admin,
+        error
+    } = await db
+
+        .from("admins")
+
+        .select(
+            "user_id,email"
+        )
+
+        .eq(
+            "user_id",
+            user.id
+        )
+
+        .maybeSingle();
+
+
+    if(
+        error ||
+        !admin
+    ){
+
+        await db.auth.signOut();
+
+
+        showLogin();
+
+
+        message(
+
+            document.getElementById(
+                "loginMessage"
+            ),
+
+            "Access denied. This account is not registered as a SAAMS administrator.",
+
+            "error"
+
+        );
+
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("loginSection")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("dashboardSection")
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById("logoutBtn")
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById("adminEmail")
+        .textContent =
+        "Signed in as " +
+        (
+            admin.email ||
+            user.email
+        );
+
+
+    await loadApplications();
+
+}
+
+
+
+/* ================= SHOW LOGIN ================= */
+
+function showLogin(){
+
+    document
+        .getElementById(
+            "loginSection"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById(
+            "dashboardSection"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "logoutBtn"
+        )
+        .classList
+        .add("hidden");
+
+}
+
+
+
+/* ================= LOAD APPLICATIONS ================= */
+
+async function loadApplications(){
+
+    if(!db){
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } = await db
+
+        .from(
+            "readmission_applications"
+        )
+
+        .select("*")
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        message(
+
+            document.getElementById(
+                "dashboardMessage"
+            ),
+
+            "Could not load applications. Check your RLS policies and admin setup.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    applications =
+        data || [];
+
+
+    renderApplications();
+
+}
+
+
+
+/* ================= RENDER ================= */
+
+function renderApplications(){
+
+    const query =
+        document
+        .getElementById(
+            "search"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const filtered =
+        applications.filter(
+            function(a){
+
+                return [
+
+                    a.application_number,
+                    a.full_name,
+                    a.registration_number,
+                    a.course,
+                    a.city,
+                    a.state,
+                    a.mobile,
+                    a.email
+
+                ].some(
+
+                    function(value){
+
+                        return String(
+                            value ?? ""
+                        )
+                        .toLowerCase()
+                        .includes(query);
+
+                    }
+
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "totalCount"
+        )
+        .textContent =
+        applications.length;
+
+
+    const today =
+        new Date()
+        .toISOString()
+        .slice(0,10);
+
+
+    document
+        .getElementById(
+            "todayCount"
+        )
+        .textContent =
+
+        applications.filter(
+            function(a){
+
+                return String(
+                    a.created_at
+                ).slice(0,10) === today;
+
+            }
+        ).length;
+
+
+    document
+        .getElementById(
+            "visibleCount"
+        )
+        .textContent =
+        filtered.length;
+
+
+    const body =
+        document.getElementById(
+            "applicationsBody"
+        );
+
+
+    body.innerHTML =
+
+        filtered.length
+
+        ?
+
+        filtered.map(
+            function(a){
+
+                return `
+
+                <tr>
+
+                    <td>
+
+                        <span class="badge">
+
+                            ${escapeHtml(
+                                a.application_number
+                            )}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            a.full_name
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            a.registration_number
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            a.course
+                        )}
+
+                        <br>
+
+                        ${escapeHtml(
+                            a.year_semester
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            a.mobile
+                        )}
+
+                        <br>
+
+                        ${escapeHtml(
+                            a.email || ""
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            formatDate(
+                                a.created_at
+                            )
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="secondary"
+                            onclick="viewDetails('${a.id}')"
+                        >
+
+                            View
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                `;
+
+            }
+        ).join("")
+
+
+        :
+
+        `
+
+        <tr>
+
+            <td
+                colspan="7"
+                style="text-align:center;padding:30px"
+            >
+
+                No applications found.
+
+            </td>
+
+        </tr>
+
+        `;
+
+}
+
+
+
+/* ================= VIEW DETAILS ================= */
+
+function viewDetails(id){
+
+    const a =
+        applications.find(
+            function(x){
+                return x.id === id;
+            }
+        );
+
+
+    if(!a){
+
+        return;
+
+    }
+
+
+    const fields = [
+
+        [
+            "Reference",
+            a.application_number
+        ],
+
+        [
+            "Full Name",
+            a.full_name
+        ],
+
+        [
+            "Registration Number",
+            a.registration_number
+        ],
+
+        [
+            "Date of Birth",
+            a.date_of_birth
+        ],
+
+        [
+            "Gender",
+            a.gender
+        ],
+
+        [
+            "Mobile",
+            a.mobile
+        ],
+
+        [
+            "Email",
+            a.email
+        ],
+
+        [
+            "Course / Program",
+            a.course
+        ],
+
+        [
+            "Year / Semester",
+            a.year_semester
+        ],
+
+        [
+            "Previous Academic Status",
+            a.previous_academic_status
+        ],
+
+        [
+            "Address",
+            a.address
+        ],
+
+        [
+            "City",
+            a.city
+        ],
+
+        [
+            "State",
+            a.state
+        ],
+
+        [
+            "Submitted",
+            formatDate(
+                a.created_at
+            )
+        ]
+
+    ];
+
+
+    document
+        .getElementById(
+            "detailGrid"
+        )
+        .innerHTML =
+
+        fields.map(
+            function([
+                key,
+                value
+            ]){
+
+                return `
+
+                <div class="detail">
+
+                    <strong>
+
+                        ${escapeHtml(
+                            key
+                        )}
+
+                    </strong>
+
+                    <span>
+
+                        ${escapeHtml(
+                            value || "—"
+                        )}
+
+                    </span>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+
+    document
+        .getElementById(
+            "detailModal"
+        )
+        .style
+        .display="flex";
+
+}
+
+
+
+/* ================= CLOSE DETAILS ================= */
+
+function closeDetails(){
+
+    document
+        .getElementById(
+            "detailModal"
+        )
+        .style
+        .display="none";
+
+}
+
+
+
+/* ================= LOGOUT ================= */
+
+async function logout(){
+
+    if(db){
+
+        await db.auth.signOut();
+
+    }
+
+
+    applications = [];
+
+
+    showLogin();
+
+}
+
+
+
+/* ================= EXPORT CSV ================= */
+
+function exportCSV(){
+
+    if(
+        !applications.length
+    ){
+
+        return;
+
+    }
+
+
+    const headers = [
+
+        "application_number",
+        "full_name",
+        "registration_number",
+        "date_of_birth",
+        "gender",
+        "mobile",
+        "email",
+        "course",
+        "year_semester",
+        "previous_academic_status",
+        "address",
+        "city",
+        "state",
+        "created_at"
+
+    ];
+
+
+    const esc =
+        function(value){
+
+            return '"' +
+
+                String(
+                    value ?? ""
+                ).replace(
+                    /"/g,
+                    '""'
+                )
+
+                + '"';
+
+        };
+
+
+    const csv = [
+
+        headers.join(","),
+
+        ...applications.map(
+            function(a){
+
+                return headers
+                    .map(
+                        function(h){
+
+                            return esc(
+                                a[h]
+                            );
+
+                        }
+                    )
+                    .join(",");
+
+            }
+        )
+
+    ].join("\n");
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                "text/csv;charset=utf-8"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "saams-readmission-applications.csv";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+
+/* ================= INITIAL CHECK ================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        if(!db){
+
+            message(
+
+                document.getElementById(
+                    "loginMessage"
+                ),
+
+                "Supabase is not configured yet. Add the project URL and publishable key to supabase-config.js.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        const {
+            data:{
+                session
+            }
+        } =
+        await db.auth.getSession();
+
+
+        if(session){
+
+            await checkAdminAndOpen();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
