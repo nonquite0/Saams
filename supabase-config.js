@@ -14,11 +14,11 @@ DO NOT put your service_role key or secret key here.
 
 
 const SUPABASE_URL =
-    "YOUR_SUPABASE_PROJECT_URL";
+    "https://bldfafyniwxlhwfhiznb.supabase.co";
 
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "YOUR_SUPABASE_PUBLISHABLE_KEY";
+    "sb_publishable_C8IyHqS7ZzxVUD0scboavg_OFpKKOXa";
 
 
 
