@@ -1933,9 +1933,9 @@ async function submitReadmission(event){
 
 
         showPopup(
-            "Submission Failed",
-            "The application could not be submitted. Please try again."
-        );
+    "Submission Failed",
+    error.message || error.details || error.hint || "Unknown database error"
+);
 
     }
 
