@@ -1830,99 +1830,82 @@ async function submitReadmission(event){
 
     event.preventDefault();
 
-
-    const form =
-        event.target;
-
+    const form = event.target;
 
     const submitButton =
         form.querySelector(".submit-button");
 
-
-    submitButton.disabled=true;
-
-    submitButton.textContent=
-        "Submitting...";
-
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
 
     if(!saamsSupabase){
 
         showPopup(
             "Database Not Configured",
-            "The database connection has not been configured yet. Please complete the Supabase setup."
+            "The database connection has not been configured yet."
         );
 
-        submitButton.disabled=false;
-
-        submitButton.textContent=
-            "Submit Application";
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Application";
 
         return;
-
     }
 
+    const fd = new FormData(form);
 
-    const fd =
-        new FormData(form);
+    // Generate application number
+    const applicationNumber =
+        "SAAMS-RA-" +
+        Date.now().toString().slice(-8);
 
+    const application = {
 
-    const application={
+        application_number:
+            applicationNumber,
 
         full_name:
-            String(fd.get("name") || "")
-            .trim(),
+            String(fd.get("name") || "").trim(),
 
         registration_number:
-            String(fd.get("reg") || "")
-            .trim(),
+            String(fd.get("reg") || "").trim(),
 
         date_of_birth:
-            fd.get("dob") || null,
+            String(fd.get("dob") || "").trim(),
 
         gender:
-            String(fd.get("gender") || "")
-            .trim(),
+            String(fd.get("gender") || "").trim(),
 
         mobile:
-            String(fd.get("mobile") || "")
-            .trim(),
+            String(fd.get("mobile") || "").trim(),
 
         email:
-            String(fd.get("email") || "")
-            .trim() || null,
+            String(fd.get("email") || "").trim() || null,
 
         course:
-            String(fd.get("course") || "")
-            .trim(),
+            String(fd.get("course") || "").trim(),
 
         year_semester:
-            String(fd.get("semester") || "")
-            .trim(),
+            String(fd.get("semester") || "").trim(),
 
         previous_academic_status:
-            String(fd.get("status") || "")
-            .trim() || null,
+            String(fd.get("status") || "").trim() || null,
 
         address:
-            String(fd.get("address") || "")
-            .trim(),
+            String(fd.get("address") || "").trim(),
 
         city:
-            String(fd.get("city") || "")
-            .trim(),
+            String(fd.get("city") || "").trim(),
 
         state:
-            String(fd.get("state") || "")
-            .trim()
+            String(fd.get("state") || "").trim()
 
     };
 
 
-    const {
-    error
-} = await saamsSupabase
-    .from("readmission_applications")
-    .insert(application);
+    const { error } = await saamsSupabase
+        .from("readmission_applications")
+        .insert(application);
+
 
     if(error){
 
@@ -1931,30 +1914,375 @@ async function submitReadmission(event){
             error
         );
 
-
         showPopup(
-    "Submission Failed",
-    error.message || error.details || error.hint || "Unknown database error"
-);
+            "Submission Failed",
+            error.message ||
+            error.details ||
+            error.hint ||
+            "Unknown database error"
+        );
 
-    }
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Application";
 
-    else{
-
-        showPopup(
-    "Application Submitted",
-    "Your application has been submitted successfully."
-);
-
-
-        form.reset();
-
+        return;
     }
 
 
-    submitButton.disabled=false;
+    // Create application receipt
+    const receiptHTML = `
 
-    submitButton.textContent=
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SAAMS Application - ${applicationNumber}</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+    margin:0;
+    padding:20px;
+    color:#222;
+}
+
+.receipt{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+}
+
+.header{
+    text-align:center;
+    border-bottom:2px solid #222;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.header h1{
+    margin:0;
+    font-size:28px;
+}
+
+.header p{
+    margin:6px 0;
+    color:#555;
+}
+
+.application-number{
+    background:#f1f1f1;
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
+    border-radius:6px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+td:first-child{
+    font-weight:bold;
+    width:35%;
+    background:#f7f7f7;
+}
+
+.status{
+    margin-top:20px;
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+    border:1px solid #aaa;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    font-size:13px;
+    color:#666;
+}
+
+.buttons{
+    max-width:800px;
+    margin:20px auto;
+    display:flex;
+    gap:10px;
+}
+
+button{
+    flex:1;
+    padding:13px;
+    border:none;
+    border-radius:7px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.print{
+    background:#222;
+    color:white;
+}
+
+.download{
+    background:#444;
+    color:white;
+}
+
+@media(max-width:600px){
+
+    body{
+        padding:10px;
+    }
+
+    .receipt{
+        padding:18px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    td{
+        font-size:14px;
+    }
+
+}
+
+@media print{
+
+    body{
+        background:white;
+        padding:0;
+    }
+
+    .receipt{
+        box-shadow:none;
+        border-radius:0;
+    }
+
+    .buttons{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="receipt" id="receipt">
+
+<div class="header">
+
+<h1>SAAMS</h1>
+
+<p>Student Academic Management System</p>
+
+<p><strong>Readmission Application</strong></p>
+
+</div>
+
+<div class="application-number">
+
+Application Number:<br>
+
+${applicationNumber}
+
+</div>
+
+<table>
+
+<tr>
+<td>Full Name</td>
+<td>${application.full_name}</td>
+</tr>
+
+<tr>
+<td>Registration Number</td>
+<td>${application.registration_number}</td>
+</tr>
+
+<tr>
+<td>Date of Birth</td>
+<td>${application.date_of_birth}</td>
+</tr>
+
+<tr>
+<td>Gender</td>
+<td>${application.gender}</td>
+</tr>
+
+<tr>
+<td>Mobile Number</td>
+<td>${application.mobile}</td>
+</tr>
+
+<tr>
+<td>Email Address</td>
+<td>${application.email || "Not Provided"}</td>
+</tr>
+
+<tr>
+<td>Course / Program</td>
+<td>${application.course}</td>
+</tr>
+
+<tr>
+<td>Year / Semester</td>
+<td>${application.year_semester}</td>
+</tr>
+
+<tr>
+<td>Previous Academic Status</td>
+<td>${application.previous_academic_status || "Not Provided"}</td>
+</tr>
+
+<tr>
+<td>Address</td>
+<td>${application.address}</td>
+</tr>
+
+<tr>
+<td>City</td>
+<td>${application.city}</td>
+</tr>
+
+<tr>
+<td>State</td>
+<td>${application.state}</td>
+</tr>
+
+</table>
+
+<div class="status">
+
+✓ Application Successfully Submitted
+
+</div>
+
+<div class="footer">
+
+This is a computer-generated application receipt.
+
+<br>
+
+SAAMS - Student Academic Management System
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="print"
+onclick="window.print()">
+
+🖨 Print Application
+
+</button>
+
+<button class="download"
+onclick="downloadApplication()">
+
+📥 Download Application
+
+</button>
+
+</div>
+
+
+<script>
+
+function downloadApplication(){
+
+    const html =
+        document.documentElement.outerHTML;
+
+    const blob =
+        new Blob(
+            [html],
+            {type:"text/html"}
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download =
+        "${applicationNumber}.html";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+
+}
+
+</script>
+
+</body>
+
+</html>
+
+`;
+
+
+    // Show receipt in a new window
+    const receiptWindow =
+        window.open("", "_blank");
+
+    if(receiptWindow){
+
+        receiptWindow.document.open();
+
+        receiptWindow.document.write(
+            receiptHTML
+        );
+
+        receiptWindow.document.close();
+
+    }else{
+
+        showPopup(
+            "Application Submitted",
+            "Your application was submitted successfully. Please allow pop-ups to view your application receipt."
+        );
+
+    }
+
+    form.reset();
+
+    submitButton.disabled = false;
+
+    submitButton.textContent =
         "Submit Application";
 
 }
