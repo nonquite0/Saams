@@ -14,7 +14,7 @@ DO NOT put your service_role key or secret key here.
 
 
 const SUPABASE_URL =
-    "https://bldfafyniwxlhwfhiznb.supabase.co/rest/v1/";
+    "https://bldfafyniwxlhwfhiznb.supabase.co";
 
 
 const SUPABASE_PUBLISHABLE_KEY =
