@@ -1919,18 +1919,10 @@ async function submitReadmission(event){
 
 
     const {
-        data,
-        error
-    } = await saamsSupabase
-
-        .from("readmission_applications")
-
-        .insert(application)
-
-        .select("application_number")
-
-        .single();
-
+    error
+} = await saamsSupabase
+    .from("readmission_applications")
+    .insert(application);
 
     if(error){
 
@@ -1950,10 +1942,9 @@ async function submitReadmission(event){
     else{
 
         showPopup(
-            "Application Submitted",
-            "Your application was submitted successfully. Your reference number is " +
-            data.application_number
-        );
+    "Application Submitted",
+    "Your application has been submitted successfully."
+);
 
 
         form.reset();
